@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CreatDice : MonoBehaviour
 {
-    public GameObject prefab;
+    public List<GameObject> prefabs;
     public List<Transform> diceParents;
     private Vector2Int randomPos = new Vector2Int();
     private GameObject[,] objects = new GameObject[2,3];
@@ -42,12 +42,15 @@ public class CreatDice : MonoBehaviour
 
         if(count == 6) return;
         
+          int randomIndex = Random.Range(0, prefabs.Count);
+          GameObject randomPrefab = prefabs[randomIndex]; 
+
         randomPos.x = Random.Range(0, 2);
         randomPos.y = Random.Range(0, 3);
 
         if(objects[randomPos.x,randomPos.y].transform.childCount < 1)
         {
-            Instantiate(prefab, objects[randomPos.x, randomPos.y].transform);
+            Instantiate(randomPrefab, objects[randomPos.x, randomPos.y].transform);
         }
         else
         {
